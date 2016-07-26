@@ -14,23 +14,54 @@ const ResponseError = require('./error');
 const DogsController = {};
 
 DogsController.index = function(req, res, next) {
-  next(new ResponseError(501, 'Not Implemented'));
+  Dog.find()
+    .exec()
+    .then(doc => res.status(200).json(doc))
+    .catch(next);
 };
 
 DogsController.show = function(req, res, next) {
-  next(new ResponseError(501, 'Not Implemented'));
+  Dog.findById(req.params.id)
+    .exec()
+    .then(doc => {
+      if(!doc) {
+        throw new ResponseError(404, 'Not Found');
+      }
+      res.status(200).json(doc);
+    })
+    .catch(next);
 };
 
 DogsController.create = function(req, res, next) {
-  next(new ResponseError(501, 'Not Implemented'));
+  Dog.create(req.body)
+    .then(doc => res.status(200).json(doc))
+    .catch(next);
 };
 
 DogsController.update = function(req, res, next) {
-  next(new ResponseError(501, 'Not Implemented'));
+  Dog.findById(req.params.id)
+    .exec()
+    .then(doc => {
+      if(!doc) {
+        throw new ResponseError(404, 'Not Found');
+      }
+      doc.set(req.body);
+      return doc.save();
+    })
+    .then(doc => res.status(200).json(doc))
+    .catch(next);
 };
 
 DogsController.destroy = function(req, res, next) {
-  next(new ResponseError(501, 'Not Implemented'));
+  Dog.findByIdAndRemove(req.params.id)
+    .exec()
+    .then(doc => {
+      if(!doc) {
+        throw new ResponseError(404, 'Not Found');
+      }
+      res.status(200).json({ message: 'ok' });
+    })
+    .catch(next);
 };
 
 module.exports = DogsController;
