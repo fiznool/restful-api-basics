@@ -1,0 +1,26 @@
+{
+  "name": "restful-api-basics",
+  "version": "1.0.0",
+  "description": "Basic building blocks for creating a RESTful API with express.js and mongoose.js.",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "watch": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/fiznool/restful-api-basics"
+  },
+  "author": "Tom Spencer <fiznool@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.0"
+  }
+}
